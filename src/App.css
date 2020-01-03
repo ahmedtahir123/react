@@ -1,0 +1,30 @@
+body{
+  background-color:white;
+}
+.App{
+  background-color:#3f3160;
+  background-color:white;
+
+  min-height: 500px;
+  width: 400px;
+  margin: 40px auto;
+
+}
+
+#myform input{
+  height: 40px;
+  width: 200px;
+  padding: 0 20px;
+  margin: 20px;
+  border-radius: 10px;
+  font-size: 18px;
+  border:0;
+
+  
+}
+
+#myform button{
+  height: 40px;
+  font-size: 18px;
+  border-radius: 5px;
+}
