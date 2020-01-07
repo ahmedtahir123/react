@@ -3,13 +3,32 @@ body{
 }
 .App{
   background-color:#3f3160;
-  background-color:white;
-
   min-height: 500px;
   width: 400px;
   margin: 40px auto;
 
 }
+
+#setbtn{
+  /* visibility: hidden; */
+  display: none;
+
+}
+
+#abc{
+  /* display: inline-block; */
+  width:200px;
+  max-height:50px ;
+  /* background-color: grey; */
+}
+#abc h1{
+  padding-left: 20px;
+}
+
+
+
+  
+
 
 #myform input{
   height: 40px;
