@@ -10,17 +10,11 @@ body{
 }
 
 #setbtn{
-  /* visibility: hidden; */
   display: none;
 
 }
 
-#abc{
-  /* display: inline-block; */
-  width:200px;
-  max-height:50px ;
-  /* background-color: grey; */
-}
+
 #abc h1{
   padding-left: 20px;
 }

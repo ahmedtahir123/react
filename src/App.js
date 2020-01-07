@@ -3,7 +3,7 @@ import "./App.css";
 import Input from "./Input";
 
 class App extends React.Component {
-    state = {
+  state = {
     value: "",
     mytodolist: [],
     myflag: false
@@ -42,11 +42,10 @@ class App extends React.Component {
   myupdate = (e, index) => {
     e.preventDefault();
 
-    document.getElementById('q').type="text"
-    document.getElementById('setbtn').style.display="block";
+    document.getElementById("q").type = "text";
+    document.getElementById("setbtn").style.display = "block";
 
-    document.getElementById('p').style.display = 'none';
-
+    document.getElementById("p").style.display = "none";
 
     this.setState({
       myflag: true
@@ -66,15 +65,21 @@ class App extends React.Component {
 
   Mynewupdate = (event, index) => {
     event.preventDefault();
-
+    console.log(index);
     const updatedlist = [...this.state.mytodolist];
     updatedlist[index].item = this.state.value;
 
     this.setState({
       mytodolist: updatedlist
     });
+
+    document.getElementById("q").type = "hidden";
+    document.getElementById("p").style.display = "block";
+    document.getElementById("setbtn").style.display = "none";
+    this.setState({ value: "" });
   };
 
+  
   render() {
     return (
       <div className="App">
@@ -87,25 +92,20 @@ class App extends React.Component {
           <ul>
             {this.state.mytodolist.map((myitem, index) => (
               <div id="abc" key={myitem.key}>
-                <h1 id='p'>{myitem.item}</h1>
-                <input id='q' type="hidden"></input>
-                <button id="setbtn">Set</button>
+                <h1 id="p">{myitem.item}</h1>
+
+                <input
+                  onChange={this.handleChange}
+                  id="q"
+                  type="hidden"
+                ></input>
+                <button onClick={e => this.Mynewupdate(e, index)} id="setbtn">
+                  Set
+                </button>
+                
                 <button onClick={e => this.mydelete(e, index)}>del</button>
                 <button onClick={e => this.myupdate(e, index)}>update</button>
-
-                {this.state.myflag === true ? (
-                  <form>
-                    <input
-                      value={this.state.value}
-                      onChange={this.handleChange}
-                    ></input>
-                    <button onClick={event => this.Mynewupdate(event, index)}>
-                      abc
-                    </button>
-                  </form>
-                ) : (
-                  alert("asd")
-                )}
+                
               </div>
             ))}
           </ul>
