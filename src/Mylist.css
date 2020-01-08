@@ -1,0 +1,52 @@
+.list{
+    color: #fff;
+    width: 300px;
+    margin: 20px auto;
+    height: 60px;
+    background-color: #bf07ac;
+    border-radius: 5px;
+    align-items: center;
+
+
+}
+
+
+.list p{
+    /* padding: 2px; */
+    position: relative;
+    margin: 10px;
+    align-items: center;
+
+    
+}
+.list p input:focus{
+    outline: none; 
+    align-items: center;
+
+}
+.list p span{
+    position: absolute;
+    right:10px;
+
+}
+
+
+#btn1{
+    background-color: transparent;
+    top: 7px;
+}
+
+
+.list p input{
+
+    background-color: transparent;
+    border: 0;
+    color:black;
+    font-size: 20px;
+    
+    font-weight: bold;
+        margin-top: 15px;;
+
+    
+    
+}

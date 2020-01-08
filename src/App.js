@@ -1,117 +1,112 @@
 import React from "react";
 import "./App.css";
-import Input from "./Input";
+import ListItem from './Mylist'
+import 'antd/dist/antd.css';
+import {  Button } from 'antd';
+
+
+
 
 class App extends React.Component {
-  state = {
-    value: "",
-    mytodolist: [],
-    myflag: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
 
-  handleChange = event => {
-    this.setState({ value: event.target.value });
-  };
+      items: [],
+      currentItem: {
+        text: "",
+        key: ""
+      }
+    };
 
-  handleSubmit = event => {
-    event.preventDefault();
 
-    if (this.state.value !== "") {
-      var myobject = {
-        item: this.state.value,
+    this.handleInput = this.handleInput.bind(this);
+    this.addItem = this.addItem.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
+    this.updateItem = this.updateItem.bind(this);
+
+
+  }
+
+
+
+  handleInput(event) {
+    this.setState({
+      currentItem: {
+        text: event.target.value,
         key: Date.now()
-      };
-      this.state.mytodolist.push(myobject);
-      const mylist = this.state.mytodolist;
+      }
+    })
+
+  }
+
+  addItem(event) {
+    event.preventDefault();
+    const newItem = this.state.currentItem;
+    if (newItem.text !== "") {
+      const items = [...this.state.items, newItem];
       this.setState({
-        mytodolist: mylist
-      });
-      this.setState({ value: "" });
+        items: items,
+        currentItem: {
+          text: '',
+          key: ''
+        }
+      })
     }
   };
 
-  mydelete = (e, index) => {
-    e.preventDefault();
-    const a = [...this.state.mytodolist];
-    a.splice(index, 1);
-    this.setState({
-      mytodolist: a
-    });
-  };
 
-  myupdate = (e, index) => {
-    e.preventDefault();
 
-    document.getElementById("q").type = "text";
-    document.getElementById("setbtn").style.display = "block";
-
-    document.getElementById("p").style.display = "none";
+  deleteItem(key) {
+    const filteredItems = this.state.items.filter(item =>
+      item.key !== key);
+    console.log(filteredItems)
 
     this.setState({
-      myflag: true
-    });
+      items: filteredItems
+    })
+
   };
 
-  Myinputfield = () => {
-    return (
-      <input
-        type="text"
-        placeholder="Enter "
-        value={this.state.value}
-        onChange={this.handleChange}
-      />
-    );
-  };
 
-  Mynewupdate = (event, index) => {
-    event.preventDefault();
-    console.log(index);
-    const updatedlist = [...this.state.mytodolist];
-    updatedlist[index].item = this.state.value;
-
+  updateItem(text, key) {
+    const items = this.state.items;
+    items.map(item => {
+      if (item.key === key) {
+        item.text = text;
+      }
+    })
     this.setState({
-      mytodolist: updatedlist
-    });
+      items: items
+    })
 
-    document.getElementById("q").type = "hidden";
-    document.getElementById("p").style.display = "block";
-    document.getElementById("setbtn").style.display = "none";
-    this.setState({ value: "" });
-  };
 
-  
+  }
+
+
   render() {
     return (
+
+
       <div className="App">
-        <form id="myform">
-          <this.Myinputfield></this.Myinputfield>
-          <button id="mybtn" onClick={this.handleSubmit}>
-            Add
-          </button>
+        <form autocomplete="off" id="myform" onSubmit={this.addItem}>
 
-          <ul>
-            {this.state.mytodolist.map((myitem, index) => (
-              <div id="abc" key={myitem.key}>
-                <h1 id="p">{myitem.item}</h1>
+          <input id="hello" type="text" placeholder="Enter " value={this.state.currentItem.text} onChange={this.handleInput} />
 
-                <input
-                  onChange={this.handleChange}
-                  id="q"
-                  type="hidden"
-                ></input>
-                <button onClick={e => this.Mynewupdate(e, index)} id="setbtn">
-                  Set
-                </button>
-                
-                <button onClick={e => this.mydelete(e, index)}>del</button>
-                <button onClick={e => this.myupdate(e, index)}>update</button>
-                
-              </div>
-            ))}
-          </ul>
+          <Button type="primary"  icon="plus" htmlType="submit" />
+          <ListItem items={this.state.items} deleteItem={this.deleteItem} updateItem={this.updateItem}></ListItem>
+
+
+
+
         </form>
+
+    
+
+
       </div>
-    );
+
+    )
   }
 }
 
